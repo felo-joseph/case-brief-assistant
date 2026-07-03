@@ -1,0 +1,9 @@
+{
+  "name": "case-brief-assistant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paste a court opinion, get a structured FIRAC brief and a plain English summary, powered by the Claude API.",
+  "engines": {
+    "node": ">=18"
+  }
+}

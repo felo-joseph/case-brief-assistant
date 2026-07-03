@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Brief Assistant</title>
+  <meta name="description" content="Paste a court opinion and get a structured brief: Facts, Issue, Holding, Reasoning, and Rule, plus a plain English summary." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead__inner">
+      <p class="masthead__eyebrow">A study tool for law students</p>
+      <h1 class="masthead__title">Case Brief Assistant</h1>
+      <p class="masthead__tagline">Facts &middot; Issue &middot; Holding &middot; Reasoning &middot; Rule</p>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="intake" aria-labelledby="intake-heading">
+      <div class="paper paper--intake">
+        <div class="paper__tab">Exhibit A</div>
+        <h2 id="intake-heading" class="paper__label">Paste the opinion</h2>
+        <p class="paper__hint">Drop in the full text of a court opinion. The majority opinion alone works best.</p>
+
+        <textarea
+          id="opinion-input"
+          class="opinion-input"
+          placeholder="Paste the court opinion here..."
+          spellcheck="false"
+        ></textarea>
+
+        <div class="intake__footer">
+          <span id="char-count" class="char-count">0 characters</span>
+          <div class="intake__actions">
+            <button id="clear-btn" class="btn btn--ghost" type="button">Clear</button>
+            <button id="brief-btn" class="btn btn--primary" type="button">
+              <span class="btn__label">Brief this opinion</span>
+              <span class="btn__arrow" aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </div>
+
+        <p id="form-error" class="form-error" role="alert" hidden></p>
+      </div>
+    </section>
+
+    <section class="output" aria-labelledby="output-heading" aria-live="polite">
+      <h2 id="output-heading" class="sr-only">Case brief</h2>
+
+      <div id="empty-state" class="empty-state">
+        <p class="empty-state__mark">&sect;</p>
+        <p class="empty-state__text">Paste an opinion and file it to see the brief here.</p>
+      </div>
+
+      <div id="loading-state" class="loading-state" hidden>
+        <div class="loading-state__seal" aria-hidden="true"></div>
+        <p class="loading-state__text">Reading the opinion and drafting the brief...</p>
+      </div>
+
+      <article id="brief" class="brief" hidden>
+        <div class="brief__header">
+          <p id="case-name" class="brief__case-name"></p>
+          <div id="stamp" class="stamp" aria-hidden="true">Briefed</div>
+        </div>
+
+        <div class="brief__section" data-section="issue">
+          <p class="brief__label">Issue</p>
+          <p id="issue-text" class="brief__body"></p>
+        </div>
+
+        <div class="brief__section" data-section="holding">
+          <p class="brief__label">Holding</p>
+          <p id="holding-text" class="brief__body"></p>
+        </div>
+
+        <div class="brief__section" data-section="facts">
+          <p class="brief__label">Facts</p>
+          <p id="facts-text" class="brief__body"></p>
+        </div>
+
+        <div class="brief__section" data-section="reasoning">
+          <p class="brief__label">Reasoning</p>
+          <p id="reasoning-text" class="brief__body"></p>
+        </div>
+
+        <div class="brief__section" data-section="rule">
+          <p class="brief__label">Rule</p>
+          <p id="rule-text" class="brief__body"></p>
+        </div>
+
+        <div class="brief__summary">
+          <p class="brief__label brief__label--summary">Plain English summary</p>
+          <p id="summary-text" class="brief__summary-text"></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>For study and drafting practice. Always check the brief against the original opinion before relying on it.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
